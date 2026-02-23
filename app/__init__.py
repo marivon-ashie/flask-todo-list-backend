@@ -9,10 +9,14 @@ login_manager=LoginManager()
 def create_app():
     app = Flask(__name__)
     
-    app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///database.db'
+    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:454678@localhost:5432/todo_list_db"
     app.config['SECRET_KEY'] = str(uuid4())
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] =False
+    
+    
+    print("DB URI:", app.config["SQLALCHEMY_DATABASE_URI"])
 
+   
     db.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
